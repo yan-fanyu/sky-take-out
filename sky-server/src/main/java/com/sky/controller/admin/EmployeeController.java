@@ -119,7 +119,8 @@ public class EmployeeController {
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工信息")
     public Result<Employee> getById(@PathVariable Long id){
-        return null;
+        Employee employee = employeeService.getById(id);
+        return Result.success(employee);
     }
 
 }
