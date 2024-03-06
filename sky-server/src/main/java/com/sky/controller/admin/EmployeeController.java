@@ -42,7 +42,10 @@ public class EmployeeController {
     @Autowired
     private JwtProperties jwtProperties;
 
-
+//    @PostMapping("/test")
+//    public int test(int i1, int i2){
+//        return
+//    }
 
     /**
      * 登录11
@@ -94,9 +97,6 @@ public class EmployeeController {
         employeeService.save(employeeDTO);
 
         return Result.success();
-
-
-
     }
 
     @GetMapping("/page")
@@ -106,6 +106,20 @@ public class EmployeeController {
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
 
         return Result.success(pageResult);
+    }
+
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用禁用员工账号")
+    public Result startOrStop(@PathVariable("status") Integer status, Long id){
+        log.info("启用禁用员工的账号:{}, {}", status, id);
+        employeeService.startOrStop(status, id);
+        return Result.success();
+    }
+
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id){
+        return null;
     }
 
 }
